@@ -7,17 +7,19 @@ import { fetchNotes } from "../../services/noteService";
 import Pagination from "../Pagination/Pagination";
 import NoteModal from "../NoteModal/NoteModal";
 import NoteForm from "../NoteForm/NoteForm";
+import { useDebounce } from "use-debounce";
 
 export default function App() {
-  const [query, setQuery] = useState<string>("");
+  const [inputValue, setInputValue] = useState<string>("");
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 
-  //FETCHING ONE LIST
+  //FETCHING & SEARCHING NOTES
+  const [debounseInputValue] = useDebounce(inputValue, 500);
 
   const notes = useQuery({
-    queryKey: ["notes", query, currentPage],
-    queryFn: () => fetchNotes(query, currentPage),
+    queryKey: ["notes", debounseInputValue, currentPage],
+    queryFn: () => fetchNotes(inputValue, currentPage),
     placeholderData: keepPreviousData,
   });
 
@@ -26,7 +28,7 @@ export default function App() {
   return (
     <div className={css.app}>
       <header className={css.toolbar}>
-        <SearchBox />
+        <SearchBox value={inputValue} onSearch={setInputValue} />
         {totalPages > 0 && (
           <Pagination
             totalPages={totalPages}
