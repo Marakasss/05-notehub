@@ -27,6 +27,8 @@ export default function App() {
 
   return (
     <div className={css.app}>
+      {/* -------HEADER ELEMENTS--------- */}
+
       <header className={css.toolbar}>
         <SearchBox value={inputValue} onSearch={setInputValue} />
         {totalPages > 0 && (
@@ -40,7 +42,13 @@ export default function App() {
           Create note +
         </button>
       </header>
+
+      {/* -------NOTELIST--------- */}
+
       <NoteList notes={notes.data?.notes ?? []} />
+
+      {/* -------NOTE MODAL--------- */}
+
       {isModalOpen && (
         <NoteModal
           onClose={() => setIsModalOpen(false)}
