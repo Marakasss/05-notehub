@@ -8,6 +8,8 @@ import Pagination from "../Pagination/Pagination";
 import NoteModal from "../NoteModal/NoteModal";
 import NoteForm from "../NoteForm/NoteForm";
 import { useDebounce } from "use-debounce";
+import Loader from "../Loader/Loader";
+import ErrorMessage from "../ErrorMessage/ErrorMessage";
 
 export default function App() {
   const [inputValue, setInputValue] = useState<string>("");
@@ -27,6 +29,10 @@ export default function App() {
 
   return (
     <div className={css.app}>
+      {/* -------LOADER--------- */}
+
+      {notes.isLoading && <Loader />}
+
       {/* -------HEADER ELEMENTS--------- */}
 
       <header className={css.toolbar}>
@@ -46,6 +52,7 @@ export default function App() {
       {/* -------NOTELIST--------- */}
 
       <NoteList notes={notes.data?.notes ?? []} />
+      {notes.isError && <ErrorMessage />}
 
       {/* -------NOTE MODAL--------- */}
 
