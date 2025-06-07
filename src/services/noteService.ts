@@ -1,20 +1,16 @@
 import axios from "axios";
-import type { Note, Tag } from "../types/note";
+import type { Note, NewNoteData } from "../types/note";
 
 //TYPES
 interface FetchNotesResponse {
   notes: Note[];
-}
-
-interface NewNoteData {
-  title: string;
-  content: string;
-  tag: Tag;
+  totalPages: number;
 }
 
 interface FetchNotesParams {
   search?: string;
   page?: number;
+  perPage?: number;
 }
 
 //TOKEN CHECK
@@ -39,6 +35,7 @@ export async function fetchNotes(
   const params: FetchNotesParams = {
     ...(query.trim() !== "" && { search: query.trim() }),
     page: page,
+    perPage: 12,
   };
 
   const response = await axiosInstance.get<FetchNotesResponse>("/notes", {
@@ -54,7 +51,7 @@ export async function createNote(newNote: NewNoteData) {
 }
 
 //DELETE
-export async function deleteNote(noteId: string): Promise<Note> {
+export async function deleteNote(noteId: number): Promise<Note> {
   const response = await axiosInstance.delete<Note>(`/notes/${noteId}`);
   return response.data;
 }
