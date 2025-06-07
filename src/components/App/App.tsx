@@ -21,7 +21,7 @@ export default function App() {
 
   const notes = useQuery({
     queryKey: ["notes", debounseInputValue, currentPage],
-    queryFn: () => fetchNotes(inputValue, currentPage),
+    queryFn: () => fetchNotes(debounseInputValue, currentPage),
     placeholderData: keepPreviousData,
   });
 
