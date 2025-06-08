@@ -10,6 +10,7 @@ interface FetchNotesResponse {
 interface FetchNotesParams {
   search?: string;
   page?: number;
+  perPage: number;
 }
 
 //TOKEN CHECK
