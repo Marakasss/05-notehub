@@ -28,7 +28,6 @@ export default function NoteForm({ onClose }: NoteFormProps) {
   ) => {
     mutate(values);
     actions.resetForm();
-    onClose();
   };
 
   //SENDING
@@ -36,6 +35,7 @@ export default function NoteForm({ onClose }: NoteFormProps) {
   const { mutate } = useMutation({
     mutationFn: (values: NewNoteData) => createNote(values),
     onSuccess: () => {
+      onClose();
       queryClient.invalidateQueries({ queryKey: ["notes"] });
     },
   });

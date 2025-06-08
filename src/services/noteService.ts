@@ -10,7 +10,6 @@ interface FetchNotesResponse {
 interface FetchNotesParams {
   search?: string;
   page?: number;
-  perPage?: number;
 }
 
 //TOKEN CHECK
@@ -45,7 +44,7 @@ export async function fetchNotes(
 }
 
 //POST
-export async function createNote(newNote: NewNoteData) {
+export async function createNote(newNote: NewNoteData): Promise<Note> {
   const response = await axiosInstance.post<Note>("/notes", newNote);
   return response.data;
 }

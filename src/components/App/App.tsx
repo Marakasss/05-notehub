@@ -27,6 +27,11 @@ export default function App() {
 
   const totalPages = notes.data?.totalPages ?? 0;
 
+  const handleSearchChange = (newSearch: string) => {
+    setInputValue(newSearch);
+    setCurrentPage(1);
+  };
+
   return (
     <div className={css.app}>
       {/* -------LOADER--------- */}
@@ -36,7 +41,7 @@ export default function App() {
       {/* -------HEADER ELEMENTS--------- */}
 
       <header className={css.toolbar}>
-        <SearchBox value={inputValue} onSearch={setInputValue} />
+        <SearchBox value={inputValue} onSearch={handleSearchChange} />
         {totalPages > 0 && (
           <Pagination
             totalPages={totalPages}
