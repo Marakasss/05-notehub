@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css2?family=Grape+Nuts&family=Norican&display=swap");
 :root {
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
@@ -24,10 +25,16 @@ a:hover {
 
 body {
   margin: 0;
-  background-color: #070707;
+  background-image: linear-gradient(
+      to bottom right,
+      rgba(255, 255, 255, 0.3),
+      rgba(0, 0, 0, 0.3)
+    ),
+    url(https://assets.codepen.io/2509128/paper.jpeg);
   color: #f1f1f1;
   min-width: 320px;
   min-height: 100vh;
+  font-family: "Grape Nuts", cursive;
 }
 
 h1 {
