@@ -10,7 +10,7 @@
 /* базовий стиль */
 .listItem {
   --levitate: 0;
-  background-color: lightgreen;
+  background-image: linear-gradient(to left, #eeffb2, #b6c888);
   padding: 16px 16px 6px 16px;
   position: relative;
   transform-style: preserve-3d;
@@ -19,6 +19,10 @@
   display: flex;
   flex-direction: column;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+}
+
+.listItem:nth-child(odd) {
+  background-image: linear-gradient(to left, #eeffb2, #b6c888);
 }
 
 .listItem::before {
@@ -47,7 +51,7 @@
   transition: opacity 0.3s;
   z-index: 1;
   mix-blend-mode: overlay;
-  background-image: linear-gradient(to left, #ffe4b2, #c8b188);
+  background-image: linear-gradient(to left, #ffe4b2, #c8b0886f);
   pointer-events: none;
 }
 
@@ -101,17 +105,19 @@
 
 .title {
   font-size: 28px;
-  font-weight: 900;
+  font-weight: 300;
   line-height: 0.9em;
   margin: 0 0 8px 0;
-  color: midnightblue;
+  color: rgb(1, 1, 51);
 }
 
 .content {
   margin: 0;
   flex-grow: 1;
-  font-size: 18px;
-  font-weight: 600;
+  font-size: 20px;
+  line-height: 0.9em;
+  letter-spacing: 0.01em;
+  font-weight: 300;
   color: midnightblue;
   margin-bottom: 24px;
   display: -webkit-box;
@@ -126,7 +132,7 @@
   font-size: 22px;
   color: #d10d0d;
   background-color: transparent;
-  border: none;
+  border: 1px solid transparent;
   border-radius: 4px;
   cursor: pointer;
   transition: border 0.2s ease;
@@ -147,7 +153,7 @@
 .tag {
   display: inline-block;
 
-  font-size: 22px;
+  font-size: 14px;
   font-weight: 900;
   padding: 0 6px;
   color: #000000;
@@ -158,4 +164,10 @@
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+.pin {
+  position: absolute;
+  top: -4px;
+  left: -4px;
 }

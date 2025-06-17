@@ -10,6 +10,7 @@ import NoteForm from "../NoteForm/NoteForm";
 import { useDebounce } from "use-debounce";
 import Loader from "../Loader/Loader";
 import ErrorMessage from "../ErrorMessage/ErrorMessage";
+import Logo from "../Logo/Logo";
 
 export default function App() {
   const [inputValue, setInputValue] = useState<string>("");
@@ -33,15 +34,32 @@ export default function App() {
   };
 
   return (
-    <div className={css.app}>
-      {/* -------LOADER--------- */}
+    <>
+      <div className={css.app}>
+        {/* -------LOADER--------- */}
 
-      {notes.isLoading && <Loader />}
+        {notes.isLoading && <Loader />}
 
-      {/* -------HEADER ELEMENTS--------- */}
+        {/* -------HEADER ELEMENTS--------- */}
 
-      <header className={css.toolbar}>
-        <SearchBox value={inputValue} onSearch={handleSearchChange} />
+        <header className={css.toolbar}>
+          <div>
+            <SearchBox value={inputValue} onSearch={handleSearchChange} />
+          </div>
+          <Logo />
+
+          <button
+            onClick={() => setIsModalOpen(true)}
+            className={css.addbutton}
+          >
+            Create note +
+          </button>
+        </header>
+
+        {/* -------NOTELIST--------- */}
+
+        <NoteList notes={notes.data?.notes ?? []} />
+        {notes.isError && <ErrorMessage />}
         {totalPages > 0 && (
           <Pagination
             totalPages={totalPages}
@@ -49,24 +67,16 @@ export default function App() {
             onPageChange={setCurrentPage}
           />
         )}
-        <button onClick={() => setIsModalOpen(true)} className={css.button}>
-          Create note +
-        </button>
-      </header>
 
-      {/* -------NOTELIST--------- */}
+        {/* -------NOTE MODAL--------- */}
 
-      <NoteList notes={notes.data?.notes ?? []} />
-      {notes.isError && <ErrorMessage />}
-
-      {/* -------NOTE MODAL--------- */}
-
-      {isModalOpen && (
-        <NoteModal
-          onClose={() => setIsModalOpen(false)}
-          children={<NoteForm onClose={() => setIsModalOpen(false)} />}
-        />
-      )}
-    </div>
+        {isModalOpen && (
+          <NoteModal
+            onClose={() => setIsModalOpen(false)}
+            children={<NoteForm onClose={() => setIsModalOpen(false)} />}
+          />
+        )}
+      </div>
+    </>
   );
 }

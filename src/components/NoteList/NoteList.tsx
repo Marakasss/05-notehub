@@ -8,7 +8,6 @@ interface NoteListProps {
 }
 
 export default function NoteList({ notes }: NoteListProps) {
-  
   const queryClient = useQueryClient();
   const { mutate } = useMutation({
     mutationFn: (id: number) => deleteNote(id),
@@ -23,6 +22,12 @@ export default function NoteList({ notes }: NoteListProps) {
         const { id, title, content, tag } = note;
         return (
           <li key={id} className={css.listItem}>
+            <img
+              className={css.pin}
+              src="/public/pin2.png"
+              alt="pin"
+              width={30}
+            />
             <h2 className={css.title}>{title}</h2>
             <p className={css.content}>{content}</p>
             <div className={css.footer}>
